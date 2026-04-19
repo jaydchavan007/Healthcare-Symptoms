@@ -4,10 +4,15 @@ A minimalist, full-stack Next.js application for educational AI-powered symptom 
 
 ---
 
+## Video Demo
+
+
+
+
 ## Features
 
 - **Authentication** — Secure signup/login with JWT cookies, passwords hashed with bcrypt
-- **Symptom Checker** — Describe symptoms, get a structured AI analysis from Google Gemini
+- **Symptom Checker** — Describe symptoms, get a structured Gemini LLM analysis from Google Gemini
 - **Query History** — Every check is saved per-user in MongoDB; browse past results in the History tab
 - **AI Disclaimers** — Prominent warnings on every AI result that it is not medical advice
 - **Minimalist UI** — Clean, warm design with DM Serif Display + DM Sans typography
@@ -22,45 +27,11 @@ A minimalist, full-stack Next.js application for educational AI-powered symptom 
 | Language | TypeScript |
 | Database | MongoDB via Mongoose |
 | Auth | JWT + bcrypt |
-| AI | Google Gemini 1.5 Flash |
+| AI | Google gemini-3.1-flash-lite-preview |
 | Styling | CSS Modules |
 
 ---
 
-## Project Structure
-
-```
-symptom-checker/
-├── app/
-│   ├── api/
-│   │   ├── auth/
-│   │   │   ├── signup/route.ts     # POST /api/auth/signup
-│   │   │   ├── login/route.ts      # POST /api/auth/login
-│   │   │   ├── logout/route.ts     # POST /api/auth/logout
-│   │   │   └── me/route.ts         # GET  /api/auth/me
-│   │   ├── symptoms/route.ts       # POST /api/symptoms  (calls Gemini)
-│   │   └── history/route.ts        # GET  /api/history
-│   ├── login/
-│   │   ├── page.tsx
-│   │   └── auth.module.css
-│   ├── signup/
-│   │   └── page.tsx
-│   ├── dashboard/
-│   │   ├── page.tsx
-│   │   └── dashboard.module.css
-│   ├── globals.css
-│   └── layout.tsx
-├── lib/
-│   ├── mongodb.ts                  # Mongoose connection helper
-│   └── auth.ts                     # JWT sign/verify helpers
-├── models/
-│   ├── User.ts                     # User schema (name, email, password)
-│   └── Query.ts                    # Query schema (userId, symptoms, result)
-├── .env.local.example
-└── package.json
-```
-
----
 
 ## Setup Instructions
 
@@ -111,11 +82,6 @@ GEMINI_API_KEY=your-gemini-api-key-here
 mongod --dbpath /data/db
 ```
 
-**Option B — MongoDB Atlas (Cloud, free tier):**
-1. Create a free account at [https://cloud.mongodb.com](https://cloud.mongodb.com)
-2. Create a free M0 cluster
-3. Get your connection string and add it to `MONGODB_URI`
-
 ### 5. Run the App
 
 ```bash
@@ -148,30 +114,7 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## API Endpoints
 
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| POST | `/api/auth/signup` | ✗ | Create account |
-| POST | `/api/auth/login` | ✗ | Login |
-| POST | `/api/auth/logout` | ✗ | Clear session cookie |
-| GET | `/api/auth/me` | ✓ | Get current user |
-| POST | `/api/symptoms` | ✓ | Analyse symptoms with Gemini |
-| GET | `/api/history` | ✓ | Fetch past queries |
-
----
-
-## ⚠ Medical Disclaimer
+##  Medical Disclaimer
 
 This application is built for **educational and demonstration purposes only**. It does not provide medical advice, diagnoses, or treatment recommendations. Always consult a qualified, licensed healthcare professional for any medical concerns.
-
----
-
-## Production Build
-
-```bash
-npm run build
-npm start
-```
-
-For deployment, use [Vercel](https://vercel.com) (recommended for Next.js) and add your environment variables in the project settings.
