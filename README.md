@@ -8,6 +8,9 @@ A minimalist, full-stack Next.js application for educational AI-powered symptom 
 
 
 
+https://github.com/user-attachments/assets/9d7cb83b-7840-44ec-b116-9364912f3e38
+
+
 
 ## Features
 
